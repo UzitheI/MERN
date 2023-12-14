@@ -1,0 +1,5 @@
+//now to react with requests we create a route
+app.get('/',(req,res)=>{
+    res.json({mssg:'Welcome to the app'});
+})
+//here req is the request that is being sent and res is the response, whenever we get a request from the port 4000 that is siginified by / , we respond it to it by giving a json string which here is Welcome to the app
