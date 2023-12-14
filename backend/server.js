@@ -7,6 +7,12 @@ require('dotenv').config()
 const app = express();
 //express app created and stored to app
 
+const workoutRoutes=require('./routes/workouts')
+
+
+//another middleware to get the data that has to be sent, for that we use express.json 
+app.use(express.json())
+
 
 
 app.use((req,res,next)=>{
@@ -32,6 +38,10 @@ app.listen(process.env.PORT,()=>{
 //we used process.env.PORT to obtain port number that is currently hidden in the .env file
 //we used process.env.PORT to obtain port number that is currently hidden in the .env file
 
+
+
+app.use('/api/workouts',workoutRoutes)
+//we do not need to write our requests here any more as they will be imported from the routes folder, also the routes or the requests are only invoked if the workoutRoutes pass throught the api and workouts
 
 
 
