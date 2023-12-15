@@ -1,6 +1,9 @@
 const express = require('express')
 //extracting the express functionalities from the nodemodules
 
+//for mongoose
+const mongoose=require('mongoose')
+
 require('dotenv').config()
 //this is a node feature where we can require the dot env to hide our port number
 
@@ -22,13 +25,19 @@ app.use((req,res,next)=>{
 //this is called a middelware which we want to run before running the response which can also be called as teh middleware
 //basically this is logging the path and the port which can be useful to us later
 
-
-
+//connecting to the database
+mongoose.connect(process.env.MONGO_URL)
+.then(()=>{
+    app.listen(process.env.PORT,()=>{
+        console.log("connected and listening to port",process.env.PORT)
+    })
+})
+.catch((error)=>{
+    console.log(error)
+})
 
 //now we have to listen to the request
-app.listen(process.env.PORT,()=>{
-    console.log("listening on port",process.env.PORT)
-})
+
 //listening is where we want to take our requests in
 //rerun the server to change any changes
 //an alternative to keep refreshing your server is to download nodemon
